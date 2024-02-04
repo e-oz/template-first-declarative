@@ -1,7 +1,15 @@
 import { NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import type { Item } from "../types";
-import { ItemsTableStore } from "./items-table.store";
+import { type ItemsTableHeader, ItemsTableStore } from "./items-table.store";
+
+const defaultHeaders: ItemsTableHeader[] = [
+  { path: 'firstName', label: 'First Name' },
+  { path: 'lastName', label: 'Last Name' },
+  { path: 'age', label: 'Age' },
+  { path: 'favColor', label: 'Favorite Color' },
+  { path: 'petName', label: 'Pet Name' },
+];
 
 @Component({
   selector: 'items-table',
@@ -21,5 +29,17 @@ export class ItemsTableComponent {
     if (items) {
       this.store.setItems(items);
     }
+  }
+
+  @Input() set headers(headers: ItemsTableHeader[]) {
+    if (headers) {
+      this.store.$headers.set(headers);
+    } else {
+      this.store.$headers.set(defaultHeaders);
+    }
+  }
+
+  constructor() {
+    this.store.$headers.set(defaultHeaders);
   }
 }

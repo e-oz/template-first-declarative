@@ -2,20 +2,19 @@
   <thead>
   <tr>
     @for (header of store.$headers(); track header.path) {
-      <th
-        class="d-inline-flex justify-content-between align-items-center gap-2"
-        (click)="store.changeSorting(header.path)"
-      >
-        <span>{{ header.label }}</span>
-        @if (store.$sortByHeader() === header.path) {
-          @if (store.$sortingOrder() === 'asc') {
-            <ng-container *ngTemplateOutlet="iconSortDown"></ng-container>
-          } @else {
-            @if (store.$sortingOrder() === 'desc') {
-              <ng-container *ngTemplateOutlet="iconSortUp"></ng-container>
+      <th (click)="store.changeSorting(header.path)">
+        <span class="d-flex flex-row align-items-center gap-2">
+          <span>{{ header.label }}</span>
+          @if (store.$sortByHeader() === header.path) {
+            @if (store.$sortingOrder() === 'asc') {
+              <ng-container *ngTemplateOutlet="iconSortDown"></ng-container>
+            } @else {
+              @if (store.$sortingOrder() === 'desc') {
+                <ng-container *ngTemplateOutlet="iconSortUp"></ng-container>
+              }
             }
           }
-        }
+        </span>
       </th>
     }
   </tr>

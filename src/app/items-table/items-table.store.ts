@@ -53,4 +53,32 @@ export class ItemsTableStore {
   setItems(items: Item[]) {
     this.$inputItems.set(items.slice());
   }
+
+  changeSorting(path: keyof Item) {
+    if (path === this.$sortByHeader()) {
+      if (this.$sortingOrder() === 'asc') {
+        this.$sortingOrder.set('desc');
+      } else {
+        this.$sortByHeader.set(undefined);
+      }
+    } else {
+      this.$sortByHeader.set(path);
+      this.$sortingOrder.set('asc');
+    }
+  }
+
+  prevPage() {
+    const page = this.$page();
+    if (page > 0) {
+      this.$page.set(page - 1);
+    }
+  }
+
+  nextPage() {
+    const page = this.$page();
+    const items = this.$sortedItems();
+    if (items.length > ((page + 1) * this.$itemsPerPage())) {
+      this.$page.set(page + 1);
+    }
+  }
 }
