@@ -7,7 +7,16 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development"
   },
-  "private": true,
+  "author": {
+    "name": "Evgeniy OZ",
+    "email": "normandiggs@gmail.com",
+    "url": "https://jamm.dev"
+  },
+  "repository": {
+    "url": "git+https://github.com/e-oz/template-first-declarative.git"
+  },
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "@angular/animations": "^17.1.2",
     "@angular/common": "^17.1.2",
